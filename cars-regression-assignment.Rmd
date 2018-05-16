@@ -2,7 +2,10 @@
 title: "cars-regression-assignment.R"
 author: "William Alexander"
 date: "May 16, 2018"
-output: html_document
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

@@ -1,0 +1,405 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={cars-regression-assignment.R},
+            pdfauthor={William Alexander},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{cars-regression-assignment.R}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{William Alexander}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{May 16, 2018}
+
+
+\begin{document}
+\maketitle
+
+\section{Executive Summary}\label{executive-summary}
+
+In this report we will use the mtcars dataset from the 1974 Motor Trend
+US magazine to answer the following questions:
+
+\begin{itemize}
+\tightlist
+\item
+  ``Is an automatic or manual transmission better for MPG''
+\item
+  ``Quantify the MPG difference between automatic and manual
+  transmissions''
+\end{itemize}
+
+MPG is miles per gallon (MPG). How different is the MPG between
+automatic and manual transmissions?
+
+Using hypothesis testing and simple linear regression, we determine that
+there is a signficant difference between the mean MPG for automatic and
+manual transmission cars. It is found that the manual transmission cars
+has 7.245 more MPGs on average. However, in order to adjust for other
+confounding variables such as the weight and horsepower of the car, we
+ran a multivariate regression to get a better estimate the impact of
+transmission type on MPG. After validating the model using ANOVA, the
+results from the multivariate regression reveal that, on average, manual
+transmission cars get 2.084 miles per gallon more than automatic
+transmission cars.
+
+\section{Data Processing}\label{data-processing}
+
+\subsection{Reading the mtcars data}\label{reading-the-mtcars-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(mtcars)}
+\KeywordTok{str}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+\end{verbatim}
+
+Here we that am is numeric. In order to have better interpretation we
+change it to factor variable with two levels
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars}\OperatorTok{$}\NormalTok{am <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{am)}
+\KeywordTok{levels}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{am) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Automatic"}\NormalTok{, }\StringTok{"Manual"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis}
+
+Since we are going to run a linear regression, let us plot mpg to see
+its distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\CommentTok{# Histogram with Normal Curve}
+\NormalTok{x <-}\StringTok{ }\NormalTok{mtcars}\OperatorTok{$}\NormalTok{mpg}
+\NormalTok{h<-}\KeywordTok{hist}\NormalTok{(x, }\DataTypeTok{breaks=}\DecValTok{10}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Miles Per Gallon"}\NormalTok{,}
+   \DataTypeTok{main=}\StringTok{"Histogram of Miles per Gallon"}\NormalTok{)}
+\NormalTok{xfit<-}\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(x),}\KeywordTok{max}\NormalTok{(x),}\DataTypeTok{length=}\DecValTok{40}\NormalTok{)}
+\NormalTok{yfit<-}\KeywordTok{dnorm}\NormalTok{(xfit,}\DataTypeTok{mean=}\KeywordTok{mean}\NormalTok{(x),}\DataTypeTok{sd=}\KeywordTok{sd}\NormalTok{(x))}
+\NormalTok{yfit <-}\StringTok{ }\NormalTok{yfit}\OperatorTok{*}\KeywordTok{diff}\NormalTok{(h}\OperatorTok{$}\NormalTok{mids[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{])}\OperatorTok{*}\KeywordTok{length}\NormalTok{(x)}
+\KeywordTok{lines}\NormalTok{(xfit, yfit, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{# Kernel Density Plot}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{density}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg)}
+\KeywordTok{plot}\NormalTok{(d, }\DataTypeTok{xlab =} \StringTok{"MPG"}\NormalTok{, }\DataTypeTok{main =}\StringTok{"Density Plot of MPG"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cars-regression-assignment_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+The graph shows that the mpg variable is almost a normal distribution
+and there are no outliers or skewing. Now let us see if MPG varies for
+automatic vs manual transmission cars.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(mpg}\OperatorTok{~}\NormalTok{am, }\DataTypeTok{data =}\NormalTok{ mtcars,}
+        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"dark grey"}\NormalTok{, }\StringTok{"light grey"}\NormalTok{),}
+        \DataTypeTok{xlab =} \StringTok{"Transmission"}\NormalTok{,}
+        \DataTypeTok{ylab =} \StringTok{"Miles per Gallon"}\NormalTok{,}
+        \DataTypeTok{main =} \StringTok{"MPG by Transmission Type"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cars-regression-assignment_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+We can easily see there is a difference in mpg for manual vs automatic
+and manual seems to have higher MPG compared to automatic.
+
+\section{Hypothesis Testing}\label{hypothesis-testing}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{aggregate}\NormalTok{(mpg}\OperatorTok{~}\NormalTok{am, }\DataTypeTok{data =}\NormalTok{ mtcars, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          am      mpg
+## 1 Automatic 17.14737
+## 2    Manual 24.39231
+\end{verbatim}
+
+The mean MPG of manual transmission cars is 7.245 MPGs higher than that
+of automatic transmission cars.
+
+\section{Building our Model}\label{building-our-model}
+
+\subsection{Correlation}\label{correlation}
+
+We check which predictors should go into our model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(mtcars)}
+\KeywordTok{sort}\NormalTok{(}\KeywordTok{cor}\NormalTok{(mtcars)[}\DecValTok{1}\NormalTok{,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         wt        cyl       disp         hp       carb       qsec 
+## -0.8676594 -0.8521620 -0.8475514 -0.7761684 -0.5509251  0.4186840 
+##       gear         am         vs       drat        mpg 
+##  0.4802848  0.5998324  0.6640389  0.6811719  1.0000000
+\end{verbatim}
+
+In addition to am (which by default must be included in our regression
+model), we see that wt, cyl, disp, and hp are highly correlated with our
+dependent variable mpg. As such, they may be good candidates to include
+in our model. However, if we look at the correlation matrix, we also see
+that cyl and disp are highly correlated with each other. Since
+predictors should not exhibit collinearity, we should not have cyl and
+disp in in our model.
+
+\section{Regression Model}\label{regression-model}
+
+\subsection{Simple Linear Regression}\label{simple-linear-regression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg}\OperatorTok{~}\NormalTok{am, }\DataTypeTok{data =}\NormalTok{ mtcars)}
+\KeywordTok{summary}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = mpg ~ am, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.3923 -3.0923 -0.2974  3.2439  9.5077 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   17.147      1.125  15.247 1.13e-15 ***
+## am             7.245      1.764   4.106 0.000285 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.902 on 30 degrees of freedom
+## Multiple R-squared:  0.3598, Adjusted R-squared:  0.3385 
+## F-statistic: 16.86 on 1 and 30 DF,  p-value: 0.000285
+\end{verbatim}
+
+We do not gain much more information from our hypothesis test using this
+model. Interpreting the coefficient and intercepts, we say that, on
+average, automatic cars have 17.147 MPG and manual transmission cars
+have 7.245 MPGs more. In addition, we see that the R\^{}2 value is
+0.3598. This means that our model only explains 35.98\% of the variance.
+
+\subsection{Multivariate Linear
+Regression}\label{multivariate-linear-regression}
+
+Next, we fit a multivariate linear regression for mpg on am, wt, and hp.
+Since we have two models of the same data, we run an ANOVA to compare
+the two models and see if they are significantly different.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bestfit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg}\OperatorTok{~}\NormalTok{am }\OperatorTok{+}\StringTok{ }\NormalTok{wt }\OperatorTok{+}\StringTok{ }\NormalTok{hp, }\DataTypeTok{data =}\NormalTok{ mtcars)}
+\KeywordTok{anova}\NormalTok{(fit, bestfit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Model 1: mpg ~ am
+## Model 2: mpg ~ am + wt + hp
+##   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+## 1     30 720.90                                  
+## 2     28 180.29  2    540.61 41.979 3.745e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+With a p-value of 3.745e-09, we reject the null hypothesis and claim
+that our multivariate model is significantly different from our simple
+model.
+
+Before we report the details of our model, it is important to check the
+residuals for any signs of non-normality and examine the residuals
+vs.~fitted values plot to spot for any signs of heteroskedasticity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(bestfit)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{cars-regression-assignment_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Our residuals are normally distributed and homoskedastic. We can now
+report the estimates from our final model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(bestfit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = mpg ~ am + wt + hp, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.4221 -1.7924 -0.3788  1.2249  5.5317 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 34.002875   2.642659  12.867 2.82e-13 ***
+## am           2.083710   1.376420   1.514 0.141268    
+## wt          -2.878575   0.904971  -3.181 0.003574 ** 
+## hp          -0.037479   0.009605  -3.902 0.000546 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.538 on 28 degrees of freedom
+## Multiple R-squared:  0.8399, Adjusted R-squared:  0.8227 
+## F-statistic: 48.96 on 3 and 28 DF,  p-value: 2.908e-11
+\end{verbatim}
+
+\subsection{Final Findings}\label{final-findings}
+
+This model explains over 83.99\% of the variance. Moreover, we see that
+wt and hp did indeed confound the relationship between am and mpg
+(mostly wt). Now when we read the coefficient for am, we say that, on
+average, manual transmission cars have 2.084 MPGs more than automatic
+transmission cars.
+
+
+\end{document}
